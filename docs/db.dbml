@@ -1,0 +1,52 @@
+Project Demo{
+  database_type: 'PostgreSQL'
+  Note: '''
+    # demo Database
+    **markdown content here**
+  '''
+}
+
+Table user{
+  id bigint [pk] 
+  phone_number varchar(50)
+  create_time datetime(6)
+  update_time datetime(6)
+}
+
+Table orders{
+  id bigint(20) [pk] 
+  user_id int(20)
+  status varchar(10)
+  create_time datetime(6)
+  update_time datetime(6)
+}
+
+Table order_items{
+  id bigint(20) [pk] 
+  product_id int(20)
+  quantity int(10)
+}
+
+Table  products{
+    id bigint(20) [pk] 
+    merchant_id int(20)
+    name varchar(100)
+    price int(20)
+    status varchar(10)
+    create_time datetime(6)
+    update_time datetime(6)
+}
+
+Table merchants{
+    id bigint(20) [pk] 
+    merchant_name varchar(20)
+    admin_id int(20)
+    create_time datetime(6)
+    update_time datetime(6)
+}
+
+Ref: orders.id > user.id
+Ref: merchants.admin_id > user.id
+Ref: order_items.id > orders.id
+Ref: products.id > order_items.product_id
+Ref: products.merchant_id > merchants.id
